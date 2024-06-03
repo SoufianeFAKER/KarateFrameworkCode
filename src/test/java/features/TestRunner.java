@@ -7,7 +7,7 @@ public class TestRunner {
 	@Karate.Test
 	Karate testSample() {
 		
-		return Karate.run("getapi.feature").relativeTo(getClass());
+		return Karate.run("randomemail.feature").relativeTo(getClass());
 		
 	}
 
