@@ -1,4 +1,4 @@
-Feature: Create user using post api
+Feature: Update user using PUT api
 
   Background: 
     * url 'https://gorest.co.in'
@@ -22,17 +22,37 @@ Feature: Create user using post api
              "status": "active"
          }	
       """
-    # * requestPayload.email = randomString + "@gmail.com"
     * set requestPayload.email = randomString + "@gmail.com"
     * print requestPayload
 
-  Scenario: Create a user with the given data
+  Scenario: Update a user with the given data
+    # 1st call : Create a user with the POST call response
     Given path '/public/v1/users'
     And request requestPayload
     And header Authorization = 'Bearer ' + tokenID
     When method POST
     Then status 201
     And match $.data.id == '#present'
-    And match $.data.name == '#present'
-    And match $.data.name == 'Anes'
-    And match $.data.email == requestPayload.email
+    
+    # Fetch the user ID from the post call response
+    * def userId = $.data.id
+    * print userId
+    
+    # 2nd call : PUT call to update the user
+    * def requestPutPayload =
+      """
+       {
+        	"gender": "female",
+          "status": "inactive"
+      }
+      """
+    Given path '/public/v2/users/' + userId
+    And request requestPutPayload
+    And header Authorization = 'Bearer ' + tokenID
+    When method PUT
+    Then status 200
+    And match $.id == '#present'
+    And match $.id == userId
+    And match $.name == '#present'
+    And match $.name == 'Anes'
+    And match $.email == requestPayload.email

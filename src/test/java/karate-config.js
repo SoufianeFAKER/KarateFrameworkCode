@@ -8,7 +8,7 @@ function fn() {
 		env: env, 
 		myVarName: 'hello karate', 
 		baseUrl: 'https://gorest.co.in',
-		tokenID: '47db98f7c28f1a9848743b5c88cde1a3663afc8e1146fe7364a215ba42cc3bd6'
+		tokenID: 'b07b6f98caa81ae878fce96eda234bdf598939ef72ba5ab8998b20e500ea2af8'
 	}
 
 	if (env == 'dev') { 

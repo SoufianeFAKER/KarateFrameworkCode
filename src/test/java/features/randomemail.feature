@@ -30,7 +30,7 @@ Feature: Create user using post api
     Given path '/public/v1/users'
     And request requestPayload
     And header Authorization = 'Bearer ' + tokenID
-    When method post
+    When method POST
     Then status 201
     And match $.data.id == '#present'
     And match $.data.name == '#present'
